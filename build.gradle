@@ -1,0 +1,48 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'bdma.ulb.adb'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+def vertxVersion = '3.4.1'
+
+springBoot {
+    executable = true
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-cassandra')
+
+    compile group: 'io.vertx', name: 'vertx-kafka-client', version: vertxVersion
+    compile group: 'io.vertx', name: 'vertx-core', version: vertxVersion
+    //Misc
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.4'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.4'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+    compile('org.codehaus.groovy:groovy')
+
+
+    implementation('org.springframework.boot:spring-boot-starter')
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
